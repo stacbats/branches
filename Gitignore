@@ -1,0 +1,19 @@
+# Build artefacts
+*.prg
+*.bin
+*.o
+
+# Debug / symbol files
+*.dbg
+*.sym
+
+# KickAssembler / C64Studio source metadata
+*.source
+
+# Visual Studio / VS Code folders
+.vs/
+.vscode/
+
+# VICE emulator junk (optional)
+*.vsf
+*.log

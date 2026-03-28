@@ -1,0 +1,84 @@
+
+Ill try to go over it (well, its how i understand it)
+
+
+The program waits for you to press one of three special keys: F1, F3, or F5.
+When you press one of them, the program wants to do three things:
+
+Change the color of the border around the screen
+Make a short “beep” sound (different pitch for each key)
+Print on the screen: “YOU PRESSED F1” (or F3 or F5)
+
+After that, it goes back to waiting for the next key.
+
+
+> How Does the Robot Decide Which Key Was Pressed?
+The keyboard gives the program a number for each key:
+
+F1 → number $85
+F3 → number $86
+F5 → number $87
+
+The program looks at that number to see which one is pressed.
+Instead of writing a long chain of “if this, then do that”, the jump table helps. 
+
+The Jump Table is like an address of 3 houses
+Think of a jump table like a list of addresses (house numbers) written on a piece of paper.
+You have three helpers:
+
+in House A lives F1 
+in House B lives F3
+in House A lives F5 
+
+
+Our list (the jump table) looks like this:
+
+Position 0 → house # 1000   (F1)
+Position 1 → house # 1050   (F3)
+Position 2 → house # 1100   (F5)
+
+Pressing a key, the program turns that key into a small number:
+
+F1 → 0
+F3 → 1
+F5 → 2
+
+Then it looks up the house number in the list using that small number to go to it. That is exactly what the jump table does.
+
+Step-by-Step: What Happens When You Press F3
+
+The program keeps asking “Did you press any key?” over and over (this is the WaitKey loop).
+You press F3. The keyboard returns the number $86.
+The program checks:
+Is it $85? No.
+Is it $86? Yes! → So the index number becomes 1 (second item in the list).
+
+It takes that index (1), multiplies it by 2 (because each house number takes two bytes of memory), and looks in the jump table.
+It finds the address for the second helper (Pressed F3) and copies that address into two memory boxes called JUMP_PTR (at locations $FB and $FC).
+These two boxes together hold the full “house number” where the F3 code lives.
+Then it says: jmp (JUMP_PTR)
+This means: “Go read the house number that is stored in JUMP_PTR, and jump straight there.”
+The robot instantly jumps to the PressedF3 section of the program.
+That section does:
+Changes the border color to white
+Calls the beep routine with a medium pitch
+Jumps to the printing part that says “YOU PRESSED F3”
+
+After printing, it jumps back to WaitKey and starts waiting again.
+
+Why Do We Need the Pointer Trick?
+The 6502 robot is old and simple. It cannot directly look at the list and jump using an index in one single instruction (that’s why you got the error before).
+So we do it in two safe steps:
+
+First, copy the correct address from the list into the pointer boxes.
+Then, tell the robot to jump to whatever address is written in those boxes.
+
+This is called an indirect jump — the robot doesn’t jump to a fixed place; it jumps to “whatever address you wrote in the pointer”.
+Summary in Very Simple Words
+
+The program waits for a key.
+It turns the key into a tiny number (0, 1, or 2).
+It looks up that number in a list of addresses (the jump table).
+It copies the chosen address into a special pointer.
+It jumps to that address and runs the right code (change color + beep + print).
+Then it goes back to waiting.
