@@ -1,0 +1,119 @@
+{
+  "architectures": {
+    "x86": {
+      "description": "Intel x86 / AMD64 conditional jump instructions",
+      "source": "Intel 64 and IA-32 Architectures Software Developer's Manual",
+      "mnemonics": [
+        { "mnemonic": "JMP",  "condition": "Unconditional jump", "flags": "" },
+        { "mnemonic": "JE",   "condition": "Jump if Equal", "flags": "ZF=1", "aliases": ["JZ"] },
+        { "mnemonic": "JNE",  "condition": "Jump if Not Equal", "flags": "ZF=0", "aliases": ["JNZ"] },
+        { "mnemonic": "JG",   "condition": "Jump if Greater (signed)", "flags": "ZF=0 and SF=OF", "aliases": ["JNLE"] },
+        { "mnemonic": "JGE",  "condition": "Jump if Greater or Equal (signed)", "flags": "SF=OF", "aliases": ["JNL"] },
+        { "mnemonic": "JL",   "condition": "Jump if Less (signed)", "flags": "SF≠OF", "aliases": ["JNGE"] },
+        { "mnemonic": "JLE",  "condition": "Jump if Less or Equal (signed)", "flags": "ZF=1 or SF≠OF", "aliases": ["JNG"] },
+        { "mnemonic": "JA",   "condition": "Jump if Above (unsigned)", "flags": "CF=0 and ZF=0", "aliases": ["JNBE"] },
+        { "mnemonic": "JAE",  "condition": "Jump if Above or Equal (unsigned)", "flags": "CF=0", "aliases": ["JNB", "JNC"] },
+        { "mnemonic": "JB",   "condition": "Jump if Below (unsigned)", "flags": "CF=1", "aliases": ["JC", "JNAE"] },
+        { "mnemonic": "JBE",  "condition": "Jump if Below or Equal (unsigned)", "flags": "CF=1 or ZF=1", "aliases": ["JNA"] },
+        { "mnemonic": "JS",   "condition": "Jump if Sign (negative)", "flags": "SF=1" },
+        { "mnemonic": "JNS",  "condition": "Jump if Not Sign (non-negative)", "flags": "SF=0" },
+        { "mnemonic": "JO",   "condition": "Jump if Overflow", "flags": "OF=1" },
+        { "mnemonic": "JNO",  "condition": "Jump if Not Overflow", "flags": "OF=0" },
+        { "mnemonic": "JP",   "condition": "Jump if Parity (even)", "flags": "PF=1", "aliases": ["JPE"] },
+        { "mnemonic": "JNP",  "condition": "Jump if Not Parity (odd)", "flags": "PF=0", "aliases": ["JPO"] },
+        { "mnemonic": "JCXZ", "condition": "Jump if CX register is zero", "flags": "CX=0" },
+        { "mnemonic": "JECXZ","condition": "Jump if ECX register is zero", "flags": "ECX=0" },
+        { "mnemonic": "JRCXZ","condition": "Jump if RCX register is zero", "flags": "RCX=0" }
+      ]
+    },
+    "arm": {
+      "description": "ARM / AArch32 branch instructions with condition codes",
+      "source": "ARM Architecture Reference Manual (ARMv7-A and ARMv7-R edition)",
+      "mnemonics": [
+        { "mnemonic": "B",    "condition": "Unconditional branch", "flags": "" },
+        { "mnemonic": "BEQ",  "condition": "Branch if Equal", "flags": "Z=1" },
+        { "mnemonic": "BNE",  "condition": "Branch if Not Equal", "flags": "Z=0" },
+        { "mnemonic": "BGT",  "condition": "Branch if Greater Than (signed)", "flags": "Z=0 and N=V" },
+        { "mnemonic": "BGE",  "condition": "Branch if Greater or Equal (signed)", "flags": "N=V" },
+        { "mnemonic": "BLT",  "condition": "Branch if Less Than (signed)", "flags": "N≠V" },
+        { "mnemonic": "BLE",  "condition": "Branch if Less or Equal (signed)", "flags": "Z=1 or N≠V" },
+        { "mnemonic": "BHI",  "condition": "Branch if Higher (unsigned)", "flags": "C=1 and Z=0" },
+        { "mnemonic": "BHS",  "condition": "Branch if Higher or Same (unsigned)", "flags": "C=1", "aliases": ["BCS"] },
+        { "mnemonic": "BLO",  "condition": "Branch if Lower (unsigned)", "flags": "C=0", "aliases": ["BCC"] },
+        { "mnemonic": "BLS",  "condition": "Branch if Lower or Same (unsigned)", "flags": "C=0 or Z=1" },
+        { "mnemonic": "BMI",  "condition": "Branch if Minus (negative)", "flags": "N=1" },
+        { "mnemonic": "BPL",  "condition": "Branch if Plus (non-negative)", "flags": "N=0" },
+        { "mnemonic": "BVS",  "condition": "Branch if Overflow Set", "flags": "V=1" },
+        { "mnemonic": "BVC",  "condition": "Branch if Overflow Clear", "flags": "V=0" },
+        { "mnemonic": "BAL",  "condition": "Branch Always (unconditional)", "flags": "", "aliases": ["B"] },
+        { "mnemonic": "BL",   "condition": "Branch with Link (call subroutine)", "flags": "" },
+        { "mnemonic": "BX",   "condition": "Branch and Exchange instruction set", "flags": "" },
+        { "mnemonic": "BLX",  "condition": "Branch with Link and Exchange instruction set", "flags": "" }
+      ]
+    },
+    "arm64": {
+      "description": "ARM AArch64 (64-bit) branch instructions",
+      "source": "ARM Architecture Reference Manual for A-profile architecture (ARMv8/ARMv9)",
+      "mnemonics": [
+        { "mnemonic": "B",    "condition": "Unconditional branch", "flags": "" },
+        { "mnemonic": "B.EQ", "condition": "Branch if Equal", "flags": "Z=1" },
+        { "mnemonic": "B.NE", "condition": "Branch if Not Equal", "flags": "Z=0" },
+        { "mnemonic": "B.GT", "condition": "Branch if Greater Than (signed)", "flags": "Z=0 and N=V" },
+        { "mnemonic": "B.GE", "condition": "Branch if Greater or Equal (signed)", "flags": "N=V" },
+        { "mnemonic": "B.LT", "condition": "Branch if Less Than (signed)", "flags": "N≠V" },
+        { "mnemonic": "B.LE", "condition": "Branch if Less or Equal (signed)", "flags": "Z=1 or N≠V" },
+        { "mnemonic": "B.HI", "condition": "Branch if Higher (unsigned)", "flags": "C=1 and Z=0" },
+        { "mnemonic": "B.HS", "condition": "Branch if Higher or Same (unsigned)", "flags": "C=1", "aliases": ["B.CS"] },
+        { "mnemonic": "B.LO", "condition": "Branch if Lower (unsigned)", "flags": "C=0", "aliases": ["B.CC"] },
+        { "mnemonic": "B.LS", "condition": "Branch if Lower or Same (unsigned)", "flags": "C=0 or Z=1" },
+        { "mnemonic": "B.MI", "condition": "Branch if Minus (negative)", "flags": "N=1" },
+        { "mnemonic": "B.PL", "condition": "Branch if Plus (non-negative)", "flags": "N=0" },
+        { "mnemonic": "B.VS", "condition": "Branch if Overflow Set", "flags": "V=1" },
+        { "mnemonic": "B.VC", "condition": "Branch if Overflow Clear", "flags": "V=0" },
+        { "mnemonic": "BL",   "condition": "Branch with Link (call subroutine)", "flags": "" },
+        { "mnemonic": "BR",   "condition": "Branch to Register", "flags": "" },
+        { "mnemonic": "BLR",  "condition": "Branch with Link to Register", "flags": "" },
+        { "mnemonic": "RET",  "condition": "Return from subroutine", "flags": "" },
+        { "mnemonic": "CBZ",  "condition": "Compare and Branch if Zero", "flags": "Rn=0" },
+        { "mnemonic": "CBNZ", "condition": "Compare and Branch if Not Zero", "flags": "Rn≠0" },
+        { "mnemonic": "TBZ",  "condition": "Test bit and Branch if Zero", "flags": "bit=0" },
+        { "mnemonic": "TBNZ", "condition": "Test bit and Branch if Not Zero", "flags": "bit≠0" }
+      ]
+    },
+    "riscv": {
+      "description": "RISC-V base integer instruction set branch instructions",
+      "source": "The RISC-V Instruction Set Manual, Volume I: Unprivileged ISA",
+      "mnemonics": [
+        { "mnemonic": "BEQ",  "condition": "Branch if Equal", "flags": "rs1 = rs2" },
+        { "mnemonic": "BNE",  "condition": "Branch if Not Equal", "flags": "rs1 ≠ rs2" },
+        { "mnemonic": "BLT",  "condition": "Branch if Less Than (signed)", "flags": "rs1 < rs2 (signed)" },
+        { "mnemonic": "BGE",  "condition": "Branch if Greater or Equal (signed)", "flags": "rs1 ≥ rs2 (signed)" },
+        { "mnemonic": "BLTU", "condition": "Branch if Less Than (unsigned)", "flags": "rs1 < rs2 (unsigned)" },
+        { "mnemonic": "BGEU", "condition": "Branch if Greater or Equal (unsigned)", "flags": "rs1 ≥ rs2 (unsigned)" },
+        { "mnemonic": "JAL",  "condition": "Jump and Link (unconditional, saves return address)", "flags": "" },
+        { "mnemonic": "JALR", "condition": "Jump and Link Register (indirect, saves return address)", "flags": "" }
+      ],
+      "notes": "RISC-V uses two source registers (rs1, rs2) for comparisons; there is no flags register."
+    },
+    "mips": {
+      "description": "MIPS32 / MIPS64 branch instructions",
+      "source": "MIPS32 Architecture For Programmers Volume II: The MIPS32 Instruction Set",
+      "mnemonics": [
+        { "mnemonic": "BEQ",   "condition": "Branch if Equal", "flags": "rs = rt" },
+        { "mnemonic": "BNE",   "condition": "Branch if Not Equal", "flags": "rs ≠ rt" },
+        { "mnemonic": "BGTZ",  "condition": "Branch if Greater Than Zero (signed)", "flags": "rs > 0" },
+        { "mnemonic": "BGEZ",  "condition": "Branch if Greater or Equal to Zero (signed)", "flags": "rs ≥ 0" },
+        { "mnemonic": "BLTZ",  "condition": "Branch if Less Than Zero (signed)", "flags": "rs < 0" },
+        { "mnemonic": "BLEZ",  "condition": "Branch if Less or Equal to Zero (signed)", "flags": "rs ≤ 0" },
+        { "mnemonic": "BGEZAL","condition": "Branch if Greater or Equal to Zero and Link", "flags": "rs ≥ 0" },
+        { "mnemonic": "BLTZAL","condition": "Branch if Less Than Zero and Link", "flags": "rs < 0" },
+        { "mnemonic": "BC1T",  "condition": "Branch if FPU Condition True", "flags": "FCC=1" },
+        { "mnemonic": "BC1F",  "condition": "Branch if FPU Condition False", "flags": "FCC=0" },
+        { "mnemonic": "J",     "condition": "Unconditional jump", "flags": "" },
+        { "mnemonic": "JAL",   "condition": "Jump and Link (call subroutine)", "flags": "" },
+        { "mnemonic": "JR",    "condition": "Jump Register (indirect jump)", "flags": "" },
+        { "mnemonic": "JALR",  "condition": "Jump and Link Register", "flags": "" }
+      ]
+    }
+  }
+}
